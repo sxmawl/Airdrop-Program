@@ -1,0 +1,23 @@
+{
+  "name": "airdrop-program",
+  "version": "1.0.0",
+  "description": "Airdrop refers to the act of sending a cryptocurrency to a wallet, usually for free, to either promote the cryptocurrency or enable developers to test out transactions over the blockchain without spending real money.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SakshamDevelops/Airdrop-Program.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SakshamDevelops/Airdrop-Program/issues"
+  },
+  "homepage": "https://github.com/SakshamDevelops/Airdrop-Program#readme",
+  "dependencies": {
+    "@solana/web3.js": "^1.31.0"
+  }
+}
