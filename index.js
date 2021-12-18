@@ -6,9 +6,49 @@ const {
     LAMPORTS_PER_SOL,
     Transaction,
     Account,
-   } = require("@solana/web3.js");
+} = require("@solana/web3.js");
+
 
 const newPair = new Keypair();
-
 const publicKey = new PublicKey(newPair._keypair.publicKey).toString();
-const secretKey = newPair._keypair.secretKey
+const secretKey = newPair._keypair.secretKey;
+
+
+const getBalance = async () => {
+    try{
+        const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+        const myWallet = Keypair.fromSecretKey(secretKey);
+        const walletBalance = await connection.getBalance(
+            new PublicKey(myWallet.publicKey)
+        )
+
+        console.log(`=> For wallet address ${publicKey}`);
+        console.log(` Wallet balance: ${parseInt(walletBalance)/LAMPORTS_PER_SOL}SOL`);
+    }catch(err){
+
+    }
+}
+
+const airDropSol = async () =>{
+    
+    try{
+        const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+        const myWallet = Keypair.fromSecretKey(secretKey);
+        console.log(`-- Airdropping 2 SOL --`);
+        const fromAirDropSignature  = await connection.requestAirdrop(
+            new PublicKey(myWallet.publicKey),
+            2 * LAMPORTS_PER_SOL
+        )
+        await connection.confirmTransaction(fromAirDropSignature);
+    }catch(err){
+        console.log(err);
+    }
+}
+
+const driverFunction = async () =>{
+    await getBalance();
+    await airDropSol();
+    await getBalance();
+}
+
+driverFunction();
